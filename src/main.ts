@@ -8,14 +8,15 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import { ActionsGetWorkflowResponseData } from '@octokit/types'
+import fs from 'fs';
 
 //
 // Main task function (async wrapper)
 //
 async function run(): Promise<void> {
   try {
+    const token = fs.readFileSync('/home/runner/.gittoken','utf8').replace("\n", "");
     // Required inputs
-    const token = core.getInput('token')
     const workflowRef = core.getInput('workflow')
     // Optional inputs, with defaults
     const ref = core.getInput('ref')   || github.context.ref

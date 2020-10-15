@@ -534,17 +534,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const github = __importStar(__webpack_require__(469));
+const fs_1 = __importDefault(__webpack_require__(747));
 //
 // Main task function (async wrapper)
 //
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const token = fs_1.default.readFileSync('/home/runner/.gittoken', 'utf8').replace("\n", "");
             // Required inputs
-            const token = core.getInput('token');
             const workflowRef = core.getInput('workflow');
             // Optional inputs, with defaults
             const ref = core.getInput('ref') || github.context.ref;
